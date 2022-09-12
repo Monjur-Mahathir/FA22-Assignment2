@@ -46,7 +46,7 @@ def sleep_log(date):
     fitbit_web_api_request_url = "https://api.fitbit.com/1.2/user/-/sleep/date/" + str(date) + ".json"
     resp = requests.get(fitbit_web_api_request_url, headers=user_auth).json()
     ret = {'deep': resp['summary']['stages']['deep'], 'light': resp['summary']['stages']['light'], 'rem': resp['summary']['stages']['rem'], 'wake': resp['summary']['stages']['wake']}
-    return ret
+    return jsonify(ret)
 
 @app.route("/activity/<date>", methods=["GET"])
 def get_activity(date):
@@ -66,5 +66,5 @@ def get_activity(date):
     return jsonify(ret)
     
 if __name__ == '__main__':
-    user_auth = {'Authorization':'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMzhRNVIiLCJzdWIiOiJCNEYzNVEiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyc29jIHJzZXQgcm94eSBycHJvIHJudXQgcnNsZSByYWN0IHJyZXMgcmxvYyByd2VpIHJociBydGVtIiwiZXhwIjoxNjkyMzIxOTk2LCJpYXQiOjE2NjA3ODU5OTZ9.Rw2SpXEMA3YVx1-O1W0ZamKq2BwRnUpOw_fQCMRn0z8'}
+    user_auth = {'Authorization':'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMzhSRFQiLCJzdWIiOiJCNEYzNVEiLCJpc3MiOiJGaXRiaXQiLCJ0eXAiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZXMiOiJyc29jIHJzZXQgcm94eSBycHJvIHJudXQgcnNsZSByYWN0IHJsb2MgcnJlcyByd2VpIHJociBydGVtIiwiZXhwIjoxNjkzNDg4MDQxLCJpYXQiOjE2NjE5NTIwNDF9.uk4UyLwyQeLjnoE6jxKPNCxfkzs0mFTq_09cfuyV74U'}
     app.run(debug=True)
